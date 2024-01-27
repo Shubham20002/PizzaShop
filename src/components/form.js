@@ -9,6 +9,7 @@ export default function Form(){
       const [orders,setOrders]=useState([]);
      
 
+      
       async function handleSubmit(e){
         e.preventDefault();
         // console.log("data submited")
@@ -32,7 +33,7 @@ export default function Form(){
             {/* type of pizza */}
             <h1>Type</h1>
         <input type="radio" id="type" name="type" value="veg" onChange={(e)=>
-         setOrderdata({type:e.target.value,size:orderdata.size,base:orderdata.base})}/>
+         setOrderdata({type:e.target.value,size:orderdata.size,base:orderdata.base})} />
         <label for="html">Veg</label>
 
         <input type="radio" id="type" name="type"  value="non-veg"  onChange={(e)=>
