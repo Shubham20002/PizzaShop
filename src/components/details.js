@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { db } from '../firebaseinit';
 import { doc,updateDoc} from "firebase/firestore";
 
 export default function Details(details) {
+   
     console.log("order details",details.order);
     const undeliverdorders=details.order.filter((order)=>{
         if(order.orderstage!=5 && order.orderstage!=6){
@@ -16,7 +17,7 @@ export default function Details(details) {
         }
     })
     const totaldelivered=delivered.length;
-   
+    const currenttime = new Date().getTime();
 
    async function handlecancle(orderid){
            console.log(orderid);
@@ -48,7 +49,10 @@ export default function Details(details) {
                 order.orderstage==4 ? "order picked":null || 
                 order.orderstage==5 ? "deliverd":null 
                 }</th>
-                <th>time</th>
+                <th>{Math.floor(((currenttime/1000)-(order.createdAt/1000))/60)}:
+                {
+                 Math.floor(((currenttime/1000)-(order.createdAt/1000))%60)
+                }</th>
                 <th>{order.orderstage==1 ? <button onClick={()=>{handlecancle(order.id)}}>cancle</button>:null ||
                 order.orderstage==2 ? <button onClick={()=>{handlecancle(order.id)}}>cancle</button> :null
                 }</th>
