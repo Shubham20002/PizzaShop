@@ -1,6 +1,6 @@
 
 export default function Ordercard(order){
-    const {orderno}=order.orderdetails;
+    const {orderno,id}=order.orderdetails;
     console.log(order);
 
     return(
@@ -8,7 +8,7 @@ export default function Ordercard(order){
         <div style={{width:"80%",border:"2px solid yellow",margin:"auto", marginTop:"10px",alignItems:"center"}}>
             
             <p>order no:{orderno}</p>
-            <button>Next</button>
+            <button onClick={()=>{order.handlenext(id)}}>Next</button>
 
         </div>
         </>

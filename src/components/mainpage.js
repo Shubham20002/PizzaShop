@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot,doc,updateDoc,getDoc} from "firebase/firestore";
 import { db } from '../firebaseinit';
 import Ordercard from './ordercard';
+import { serverTimestamp } from 'firebase/firestore'
 
 export default function Mainpage() {
     const [orders,setOrders]=useState([]);
@@ -17,7 +18,23 @@ export default function Mainpage() {
            console.log(orders);
          })
 },[]);
-     //seprated order based on there stage
+ async function handlenext(orderid){
+    const updated_at_timestamp = serverTimestamp()
+   
+   //fetting ordet which we are going to update
+   const docRef = doc(db, "pizzashop", orderid);
+   const docSnap = await getDoc(docRef);
+  
+
+  //updating order stage
+    const washingtonRef = doc(db, "pizzashop", orderid);
+     await updateDoc(washingtonRef, {
+    orderstage:docSnap.data().orderstage+1,
+    updatedAt: updated_at_timestamp
+        });
+};
+
+ //seprated order based on there stage
    const orderplaced=orders.filter((order)=>{
     if(order.orderstage==1){
         return order;
@@ -48,21 +65,21 @@ export default function Mainpage() {
         <div className="orderplaced" style={{width:"20%",border:"2px solid black" }}>
             <h3 style={{textAlign:"center"}}>Order Placed</h3>
             {orderplaced.map((order)=>(
-                <Ordercard orderdetails={order}/>
+                <Ordercard orderdetails={order} handlenext={handlenext}/>
             ))}
         </div>
       {/* oderder making section */}
         <div className="ordermaking" style={{width:"20%",border:"2px solid black" }}>
         <h3 style={{textAlign:"center"}}>Order making</h3>
             {ordermaking.map((order)=>(
-                <Ordercard orderdetails={order}/>
+                <Ordercard orderdetails={order} handlenext={handlenext}/>
             ))}
         </div>
         {/* order ready section */}
         <div className="orderready" style={{width:"20%",border:"2px solid black" }}>
         <h3 style={{textAlign:"center"}}>Order Ready</h3>
         {orderready.map((order)=>(
-                <Ordercard orderdetails={order}/>
+                <Ordercard orderdetails={order} handlenext={handlenext}/>
             ))}
         </div>
 
@@ -70,7 +87,7 @@ export default function Mainpage() {
         <div className="orderpicked" style={{width:"20%",border:"2px solid black" }}>
         <h3 style={{textAlign:"center"}}>Order Picked</h3>
         {orderpicked.map((order)=>(
-                <Ordercard orderdetails={order}/>
+                <Ordercard orderdetails={order} handlenext={handlenext}/>
             ))}
         </div>
     </div>

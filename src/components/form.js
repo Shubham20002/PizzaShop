@@ -2,6 +2,7 @@ import { useEffect, useState, } from "react";
 import {db} from '../firebaseinit';
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc,getCountFromServer } from "firebase/firestore"; 
+import { serverTimestamp } from 'firebase/firestore'
 
 export default function Form(){
     //to store perticular order
@@ -19,13 +20,15 @@ export default function Form(){
         const coll = collection(db, "pizzashop");
         const snapshot = await getCountFromServer(coll);
         // console.log('count: ', snapshot.data().count);
+        const updated_at_timestamp = serverTimestamp()
         
         const docRef = await addDoc(collection(db, "pizzashop"), {
             type:orderdata.type,
             size:orderdata.size,
             base:orderdata.base,
             orderno:snapshot.data().count+1,
-            orderstage:1
+            orderstage:1,
+            createdAt: updated_at_timestamp
           });
           console.log("Document written with ID: ", docRef.id);
           setOrderdata({type:"",size:"",base:""})
