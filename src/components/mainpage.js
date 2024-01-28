@@ -4,6 +4,7 @@ import { collection, onSnapshot,doc,updateDoc,getDoc} from "firebase/firestore";
 import { db } from '../firebaseinit';
 import Ordercard from './ordercard';
 import { serverTimestamp } from 'firebase/firestore'
+import Details from './details';
 
 export default function Mainpage() {
     const [orders,setOrders]=useState([]);
@@ -61,6 +62,7 @@ export default function Mainpage() {
    
     
   return (
+    <>
     <div style={{width:"80%",border:"2px solid red", height:"300px",margin:"auto",display:'flex', justifyContent:"space-between"}}>
        {/* order placed section */}
         <div className="orderplaced" style={{width:"20%",border:"2px solid black" }}>
@@ -92,5 +94,8 @@ export default function Mainpage() {
             ))}
         </div>
     </div>
+      <Details order={orders}/>
+
+    </>
   )
 }

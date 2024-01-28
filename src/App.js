@@ -4,7 +4,7 @@ import Form from './components/form'
 import Mainpage from './components/mainpage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/header';
-
+import './app.css'
 
 export default function App() {
   const router=createBrowserRouter([

@@ -11,9 +11,10 @@ export default function Ordercard(order){
         const ordertime=(currenttime/1000)-createdAt.seconds;
         let minutes = Math.floor(ordertime / 60);
         let extraSeconds = Math.floor(ordertime % 60);
-        setTotaltime({m:minutes,s:extraSeconds}); 
+        setTotaltime({m:minutes,s:extraSeconds});
     }
     )
+    
     
     
 
