@@ -31,6 +31,7 @@ export default function Mainpage() {
      await updateDoc(washingtonRef, {
     orderstage:docSnap.data().orderstage+1,
     updatedAt: updated_at_timestamp
+    
         });
 };
 

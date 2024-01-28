@@ -28,7 +28,8 @@ export default function Form(){
             base:orderdata.base,
             orderno:snapshot.data().count+1,
             orderstage:1,
-            createdAt: updated_at_timestamp
+            createdAt: updated_at_timestamp,
+            updatedAt: updated_at_timestamp
           });
           console.log("Document written with ID: ", docRef.id);
           setOrderdata({type:"",size:"",base:""})
