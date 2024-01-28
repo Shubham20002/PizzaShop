@@ -20,7 +20,7 @@ export default function Ordercard(order){
   
     return(
         <>
-        <div style={{width:"80%",border:"2px solid yellow",margin:"auto", marginTop:"10px",alignItems:"center"}}>
+        <div className={totaltime.m>3?"red":"normal"} style={{}}>
             
             <p>order no:{orderno}</p>
             <p>{totaltime.m}:{totaltime.s}</p>

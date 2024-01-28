@@ -1,6 +1,4 @@
-body{
-    
-}
+
 table{
     margin: auto;
     
@@ -9,4 +7,18 @@ th{
 padding: 20px;
 border: 2px solid black;
 
+}
+.red{
+    background-color: red;
+    width:80%;
+    border:2px solid yellow;
+    margin:auto; 
+   margin-top: 10px;
+}
+.normal{
+    /* background-color: red; */
+    width:80%;
+    border:2px solid yellow;
+    margin:auto; 
+   margin-top: 10px;
 }
