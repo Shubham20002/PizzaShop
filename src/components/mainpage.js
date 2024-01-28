@@ -8,6 +8,7 @@ import Details from './details';
 
 export default function Mainpage() {
     const [orders,setOrders]=useState([]);
+
     useEffect(()=>{
         onSnapshot(collection(db,"pizzashop"), (snapshot) => {
        
@@ -16,12 +17,12 @@ export default function Mainpage() {
               ...doc.data()}
             }) 
            setOrders(orders);
-           console.log(orders);
+           console.log("orders",orders);
          })
 },[]);
  async function handlenext(orderid){
-    const updated_at_timestamp = serverTimestamp()
-   
+    const updated_at_timestamp = new Date().getTime()
+   console.log("updated_at_timestamp",updated_at_timestamp)
    //fetting ordet which we are going to update
    const docRef = doc(db, "pizzashop", orderid);
    const docSnap = await getDoc(docRef);
@@ -63,7 +64,7 @@ export default function Mainpage() {
     
   return (
     <>
-    <div style={{width:"80%",border:"2px solid red", height:"300px",margin:"auto",display:'flex', justifyContent:"space-between"}}>
+    <div style={{width:"80%",border:"2px solid red", height:"auto",margin:"auto",display:'flex', justifyContent:"space-between"}}>
        {/* order placed section */}
         <div className="orderplaced" style={{width:"20%",border:"2px solid black" }}>
             <h3 style={{textAlign:"center"}}>Order Placed</h3>

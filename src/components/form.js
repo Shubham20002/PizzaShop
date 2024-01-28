@@ -8,19 +8,19 @@ export default function Form(){
     //to store perticular order
       const [orderdata,setOrderdata]=useState({type:"",size:"",base:""});
       // tostore all orders
-      const [orders,setOrders]=useState([]);
+    //   const [orders,setOrders]=useState([]);
       const navigate = useNavigate();
 
       
       async function handleSubmit(e){
         e.preventDefault();
         // console.log("data submited")
-        setOrders([orderdata,...orders])
+        // setOrders([orderdata,...orders])
        //getting no of orders present in db
         const coll = collection(db, "pizzashop");
         const snapshot = await getCountFromServer(coll);
         // console.log('count: ', snapshot.data().count);
-        const updated_at_timestamp = serverTimestamp()
+        const updated_at_timestamp = new Date().getTime()
         
         const docRef = await addDoc(collection(db, "pizzashop"), {
             type:orderdata.type,
@@ -34,7 +34,10 @@ export default function Form(){
           console.log("Document written with ID: ", docRef.id);
           setOrderdata({type:"",size:"",base:""})
         // console.log(orders);
-        navigate('/');
+        
+        setTimeout(() => {
+            navigate('/');
+        }, 1000);
     }
 
     
