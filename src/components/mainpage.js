@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from '../firebaseinit';
+import Ordercard from './ordercard';
 
 export default function Mainpage() {
     const [orders,setOrders]=useState([]);
@@ -42,12 +43,36 @@ export default function Mainpage() {
    
     
   return (
-    <div>
-       
-        
-        <div className="ordermaking"></div>
-        <div className="orderready"></div>
-        <div className="orderpicked"></div>
+    <div style={{width:"80%",border:"2px solid red", height:"300px",margin:"auto",display:'flex', justifyContent:"space-between"}}>
+       {/* order placed section */}
+        <div className="orderplaced" style={{width:"20%",border:"2px solid black" }}>
+            <h3 style={{textAlign:"center"}}>Order Placed</h3>
+            {orderplaced.map((order)=>(
+                <Ordercard orderdetails={order}/>
+            ))}
+        </div>
+      {/* oderder making section */}
+        <div className="ordermaking" style={{width:"20%",border:"2px solid black" }}>
+        <h3 style={{textAlign:"center"}}>Order making</h3>
+            {ordermaking.map((order)=>(
+                <Ordercard orderdetails={order}/>
+            ))}
+        </div>
+        {/* order ready section */}
+        <div className="orderready" style={{width:"20%",border:"2px solid black" }}>
+        <h3 style={{textAlign:"center"}}>Order Ready</h3>
+        {orderready.map((order)=>(
+                <Ordercard orderdetails={order}/>
+            ))}
+        </div>
+
+        {/* order picked section */}
+        <div className="orderpicked" style={{width:"20%",border:"2px solid black" }}>
+        <h3 style={{textAlign:"center"}}>Order Picked</h3>
+        {orderpicked.map((order)=>(
+                <Ordercard orderdetails={order}/>
+            ))}
+        </div>
     </div>
   )
 }
